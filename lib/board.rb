@@ -20,15 +20,16 @@ class Board
   KNIGHT_BLACK = "\u2658"
   PAWN_BLACK = "\u2659"
 
+  attr_accessor :board
+
   # Use "test" as parameter for Knight's Travails initial state
   def initialize(type = 'game')
     @board = setup_board(type)
-    display_board
   end
 
   def display_board
     (0..7).each do |i|
-      print "#{i} "
+      print "#{8 - i} "
       @board[i].each do |j|
         print "#{j} "
       end
