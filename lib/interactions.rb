@@ -17,8 +17,17 @@ module Texts
     [row, column]
   end
 
-  def chosen_column
-    puts 'In what column do you want to place the Knight? (choose from a - h)'
+  def ending_point
+    column = chosen_column('end')
+    row = chosen_row('end')
+    [row, column]
+  end
+
+  private
+
+  def chosen_column(point = 'start')
+    puts 'In what column do you want to place the Knight? (choose from a - h)' unless point == 'end'
+    puts 'To what column do you want the Knight to move? (choose from a - h)' if point == 'end'
     column = gets.chomp.downcase
     if AVAILABLE_COLUMNS.include?(column)
       AVAILABLE_COLUMNS.find_index(column)
@@ -28,8 +37,9 @@ module Texts
     end
   end
 
-  def chosen_row
-    puts 'In what row do you want to place the Knight? (choose from 1 - 8)'
+  def chosen_row(point = 'start')
+    puts 'In what row do you want to place the Knight? (choose from 1 - 8)' unless point == 'end'
+    puts 'To what row do you want the Knight to move? (choose from 1 - 8)' if point == 'end'
     row = gets.chomp.to_i
     if row.between?(1, 8)
       row - 1

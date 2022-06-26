@@ -2,6 +2,8 @@
 
 # Initialize a knight on the board. Has 8 possible moves from any position.
 class Knight
+  attr_accessor :column, :row
+
   def initialize(position = [0, 0])
     @column = position[1]
     @row = position[0]
@@ -25,6 +27,8 @@ class Knight
     p7
     p8
   end
+
+  private
 
   def p1
     column = @column - 1
