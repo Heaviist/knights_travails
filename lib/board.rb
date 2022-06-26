@@ -1,54 +1,97 @@
 # frozen_string_literal: true
 
-# Black symbols
-square_black = "\u25A0"
-king_black = "\u265A"
-queen_black = "\u265B"
-rook_black = "\u265C"
-bishop_black = "\u265D"
-knight_black = "\u265E"
-pawn_black = "\u265F"
+# Create, control and print the chess board
+class Board
+  # White symbols
+  SQUARE_WHITE = "\u25A1"
+  KING_WHITE = "\u265A"
+  QUEEN_WHITE = "\u265B"
+  ROOK_WHITE = "\u265C"
+  BISHOP_WHITE = "\u265D"
+  KNIGHT_WHITE = "\u265E"
+  PAWN_WHITE = "\u265F"
 
-# White symbols
-square_white = "\u25A1"
-king_white = "\u2654"
-queen_white = "\u2655"
-rook_white = "\u2656"
-bishop_white = "\u2657"
-knight_white = "\u2658"
-pawn_white = "\u2659"
+  # Black symbols
+  SQUARE_BLACK = "\u25A0"
+  KING_BLACK = "\u2654"
+  QUEEN_BLACK = "\u2655"
+  ROOK_BLACK = "\u2656"
+  BISHOP_BLACK = "\u2657"
+  KNIGHT_BLACK = "\u2658"
+  PAWN_BLACK = "\u2659"
 
-puts square_white, king_white, queen_white, rook_white, bishop_white, knight_white, pawn_white
-puts square_black, king_black, queen_black, rook_black, bishop_black, knight_black, pawn_black
+  # Use "test" as parameter for Knight's Travails initial state
+  def initialize(type = 'game')
+    @board = setup_board(type)
+    display_board
+  end
 
-row1 = [rook_white, knight_white, bishop_white, queen_white, king_white, bishop_white, knight_white, rook_white]
-row2 = Array.new(8, pawn_white)
-row3 = Array.new(8)
-row3.each_index do |i|
-  row3[i] = if i.even?
-              square_black
-            else
-              square_white
-            end
+  def display_board
+    (0..7).each do |i|
+      print "#{i} "
+      @board[i].each do |j|
+        print "#{j} "
+      end
+      puts "\n"
+    end
+    puts '  a b c d e f g h'
+  end
+
+  private
+
+  def setup_board(type)
+    if type == 'test'
+      knight_test_board
+    else
+      normal_game_board
+    end
+  end
+
+  def normal_game_board
+    [row8, row7, even, odd, even, odd, row2, row1]
+  end
+
+  def knight_test_board
+    [even, odd, even, odd, even, odd, even, odd]
+  end
+
+  def row8
+    [ROOK_BLACK, KNIGHT_BLACK, BISHOP_BLACK, QUEEN_BLACK, KING_BLACK, BISHOP_BLACK, KNIGHT_BLACK, ROOK_BLACK]
+  end
+
+  def row7
+    Array.new(8, PAWN_BLACK)
+  end
+
+  def row2
+    Array.new(8, PAWN_WHITE)
+  end
+
+  def row1
+    [ROOK_WHITE, KNIGHT_WHITE, BISHOP_WHITE, QUEEN_WHITE, KING_WHITE, BISHOP_WHITE, KNIGHT_WHITE, ROOK_WHITE]
+  end
+
+  def odd
+    row = Array.new(8)
+    row.each_index do |i|
+      row[i] = if i.even?
+                 SQUARE_WHITE
+               else
+                 SQUARE_BLACK
+               end
+    end
+    row
+  end
+
+  def even
+    row = Array.new(8)
+    row.each_index do |i|
+      row[i] = if i.even?
+                 SQUARE_BLACK
+               else
+                 SQUARE_WHITE
+               end
+    end
+    row
+  end
 end
-row4 = Array.new(8)
-row4.each_index do |i|
-  row4[i] = if i.even?
-              square_white
-            else
-              square_black
-            end
-end
-row5 = row3
-row6 = row4
-row7 = Array.new(8, pawn_black)
-row8 = [rook_black, knight_black, bishop_black, queen_black, king_black, bishop_black, knight_black, rook_black]
-
-p row1
-p row2
-p row3
-p row4
-p row5
-p row6
-p row7
-p row8
