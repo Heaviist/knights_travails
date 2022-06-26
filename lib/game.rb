@@ -9,10 +9,19 @@ class ChessGame
   include Texts
 
   def initialize
-    introduction
     @board = Board.new('test')
+    start
+  end
+
+  def start
+    introduction
     @board.display_board
-    p starting_point
-    # @knight = Knight.new
+    @starting_point = starting_point
+    @board.update_state(@starting_point)
+    @board.display_board
+    @knight = Knight.new(@starting_point)
+    # @ending_point = ending_point
+    @knight.generate
+    p @knight
   end
 end

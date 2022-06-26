@@ -14,14 +14,14 @@ module Texts
   def starting_point
     column = chosen_column
     row = chosen_row
-    [column, row]
+    [row, column]
   end
 
   def chosen_column
     puts 'In what column do you want to place the Knight? (choose from a - h)'
     column = gets.chomp.downcase
     if AVAILABLE_COLUMNS.include?(column)
-      column
+      AVAILABLE_COLUMNS.find_index(column)
     else
       puts 'Choose a correct column!'
       chosen_column
@@ -32,7 +32,7 @@ module Texts
     puts 'In what row do you want to place the Knight? (choose from 1 - 8)'
     row = gets.chomp.to_i
     if row.between?(1, 8)
-      row
+      row - 1
     else
       puts 'Choose a correct row!'
       chosen_row

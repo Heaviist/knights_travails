@@ -20,22 +20,28 @@ class Board
   KNIGHT_BLACK = "\u2658"
   PAWN_BLACK = "\u2659"
 
-  attr_accessor :board
+  attr_accessor :state
 
   # Use "test" as parameter for Knight's Travails initial state
   def initialize(type = 'game')
-    @board = setup_board(type)
+    @state = setup_board(type)
   end
 
   def display_board
     (0..7).each do |i|
       print "#{8 - i} "
-      @board[i].each do |j|
+      @state.reverse[i].each do |j|
         print "#{j} "
       end
       puts "\n"
     end
     puts '  a b c d e f g h'
+  end
+
+  def update_state(position = [0, 0])
+    column = position[1]
+    row = position[0]
+    @state[row][column] = KNIGHT_WHITE
   end
 
   private
@@ -49,11 +55,11 @@ class Board
   end
 
   def normal_game_board
-    [row8, row7, even, odd, even, odd, row2, row1]
+    [row1, row2, even, odd, even, odd, row7, row8]
   end
 
   def knight_test_board
-    [even, odd, even, odd, even, odd, even, odd]
+    [odd, even, odd, even, odd, even, odd, even]
   end
 
   def row8
