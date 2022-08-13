@@ -23,5 +23,10 @@ class ChessGame
     @board.display_board
     @knight = Knight.new(@starting_point)
     @ending_point = ending_point
+    trace_path(@ending_point)
+  end
+
+  def trace_path(ending_point, queue = [@knight])
+
   end
 end

@@ -6,10 +6,11 @@ class Knight
 
   attr_accessor :position, :moves
 
-  def initialize(starting_point = [0, 0], level = 0)
+  def initialize(starting_point = [0, 0], level = 0, parent = nil)
     @position = starting_point
     @level = level
     @moves = []
+    @parent = parent
     build_tree(possible_moves(position))
   end
 
@@ -25,11 +26,11 @@ class Knight
   end
 
   def build_tree(possible_moves)
-    return if @level == 6
+    return if @level == 2
 
     new_level = @level + 1
     possible_moves.each do |position|
-      moves << Knight.new(position, new_level)
+      moves << Knight.new(position, new_level, self)
     end
   end
 end
