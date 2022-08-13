@@ -4,7 +4,7 @@
 class Knight
   MOVES = [[-1, -2], [-2, -1], [-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2]].freeze
 
-  attr_accessor :position, :moves
+  attr_accessor :position, :moves, :parent
 
   def initialize(starting_point = [0, 0], level = 0, parent = nil)
     @position = starting_point
@@ -26,7 +26,7 @@ class Knight
   end
 
   def build_tree(possible_moves)
-    return if @level == 2
+    return if @level == 6
 
     new_level = @level + 1
     possible_moves.each do |position|

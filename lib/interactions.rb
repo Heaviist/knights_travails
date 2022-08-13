@@ -14,13 +14,13 @@ module Texts
   def starting_point
     column = chosen_column
     row = chosen_row
-    [row, column]
+    [column, row]
   end
 
   def ending_point
     column = chosen_column('end')
     row = chosen_row('end')
-    [row, column]
+    [column, row]
   end
 
   private
