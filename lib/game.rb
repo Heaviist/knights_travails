@@ -45,7 +45,7 @@ class ChessGame
   end
 
   def display_path(path)
-    p "The knight can get there in #{path.size - 1} moves. Here's the most efficient path:"
+    puts "The knight can get there in #{path.size - 1} moves. Here's the most efficient path:"
     path.each { |position| p position }
   end
 end

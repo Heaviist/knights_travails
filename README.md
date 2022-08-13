@@ -19,7 +19,14 @@ Perform the following steps:
 5. I might spend some time on finding ways to represent the chess board with actual chess pieces in the command line.
 
 # Results and Evaluation
-To be added later.
+1. Took an approach at first that didn't really use coding to its full potential let's say. Rewriting a lot of similar code. Now, the solution was in my head, using a constant with all the possible moves the knight could make. I should have tried more to write down what I would expect my code to do to work from there, as I just couldn't get it figured out for a while. I should have listened to myself here let's say. The most frustrating part in the end is the solution isn't that complicated now that I see it...
+2. I've gone for a simpler solution which just generates all the valid moves from any given position.
+3. BFS it was. Almost forgot to just use a queue. Simply adding a parent instance variable to each knight makes it easier to trace the path back to where we should be.
+4. Seems to be working.
+5. Definitely did. Fun to see that work
 
 # Notes for future revisiting
-To be added later.
+1. Mostly an important note to self: Write more pseudocode. And keep in mind principles like queues and parents and so on.
+2. The generation of the children is very wasteful currently, as it just generates all possible moves. On revisiting, I will change this to only create 63 children.
+3. Generally, the structure is a bit messy and all over the place. Should all fix it up a bit.
+4. Display the solution in chess notation.
