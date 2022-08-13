@@ -6,19 +6,30 @@ class Knight
 
   attr_accessor :position, :moves
 
-  def initialize(position = [0, 0])
-    @position = position
-    @moves = create_moves(position)
+  def initialize(starting_point = [0, 0], level = 0)
+    @position = starting_point
+    @level = level
+    @moves = []
+    build_tree(possible_moves(position))
   end
 
   private
 
-  def create_moves(position, possible_moves = [])
+  def possible_moves(position, valid_moves = [])
     MOVES.each do |move|
       column = position[0] + move[0]
       row = position[1] + move[1]
-      possible_moves << [column, row] if column.between?(0, 7) && row.between?(0, 7)
+      valid_moves << [column, row] if column.between?(0, 7) && row.between?(0, 7)
     end
-    possible_moves
+    valid_moves
+  end
+
+  def build_tree(possible_moves)
+    return if @level == 6
+
+    new_level = @level + 1
+    possible_moves.each do |position|
+      moves << Knight.new(position, new_level)
+    end
   end
 end
